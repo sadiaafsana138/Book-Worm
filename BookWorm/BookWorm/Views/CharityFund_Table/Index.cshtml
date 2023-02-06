@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BookWorm.Models.CharityFund_Table>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Charity Funding Organization</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fund_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FundTittle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bkash_No)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fund_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FundTittle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bkash_No)
+            </td>
+
+
+
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Fund_ID }) ||
+                @Html.ActionLink("Donate", "Donate", new { id = item.Fund_ID })
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+

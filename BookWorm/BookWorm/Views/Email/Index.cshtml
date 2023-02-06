@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Form";
+}
+
+<form method="post" action="Form">
+
+    <span class="form-control-static">Receiver Mail: </span>
+    <input class="form-control" type="text" name="rcvemail" />
+    <span class="form-control-static">Subject: </span>
+    <input class="form-control" type="text" name="sub" />
+    <span class="form-control-static">Message: </span>
+    <input class="form-control" type="text" name="msg" />
+
+
+    <button class=" btn btn-danger" type="submit"> Click to send email</button>
+
+    <a class=" btn btn-danger" onclick="SendEmail()"> Click to send email</a>
+
+</form>
+
+
+
+
+<script>
+    var SendEmail = function () {
+        $.ajax({
+            type: "Post",
+            url: "/Email/SendMailToUser",
+            success: function (data) {
+                alert("success");
+            }
+        })
+    }
+</script>

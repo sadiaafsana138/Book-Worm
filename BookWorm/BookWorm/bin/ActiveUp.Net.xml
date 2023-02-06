@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ActiveUp.Net</name>
+    </assembly>
+    <members>
+        <member name="T:ActiveUp.Net.Codec">
+            <summary>
+            Contains several static methods providing encoding/decoding in various formats.
+            </summary>
+        </member>
+        <member name="M:ActiveUp.Net.Codec.ToQuotedPrintable(System.String,System.String)">
+            <summary>
+            Encodes the text in quoted-printable format conforming to the RFC 2045 and RFC 2046.
+            </summary>
+            <param name="fromCharset">The charset of input.</param>
+            <param name="input">Data to be encoded.</param>
+            <remarks>The lines are wrapped to a length of max 78 characters to ensure data integrity across some gateways.</remarks>
+            <returns>The input encoded as 7bit quoted-printable data, in the form of max 78 characters lines.</returns>
+            <example>
+            The example below illustrates the encoding of a string in quoted-printable.
+            <code>
+            C#
+            
+            string input = "ActiveMail rocks ! Here are some non-ASCII characters =ç.";
+            string output = Codec.ToQuotedPrintable(input,"iso-8859-1");
+            </code>
+            output returns A= ctiveMail rocks ! Here are some weird characters =3D=E7.
+            
+            Non ASCII characters have been encoded (=3D represents = and =E7 represents ç).
+            </example>
+        </member>
+        <member name="M:ActiveUp.Net.Codec.RFC2047Encode(System.String,System.String)">
+            <summary>
+            Encodes the given string in a format (specified in RFC 2047) that can be used in RFC 2822 headers to represent non-ASCII textual data.
+            </summary>
+            <param name="input">The string to be encoded (the Header field's value).</param>
+            <param name="charset">The charset of the Header field's value.</param>
+            <returns>The encoded string with only 7bit characters.</returns>
+            <remarks>ActiveMail only encodes in this format using Base64, but the RFC2047Decode method also decodes string encoded in this format with quoted-printable.</remarks>
+            <example>
+            The example below illustrates the encoding of a string.
+            <code>
+            C#
+            
+            string input = "ActiveMail rocks ! Here are some non-ASCII characters =ç.";
+            string output = Codec.RFC2047Encode(input,"iso-8859-1");
+            </code>
+            
+            output returns =?iso-8859-1?B?QWN0aXZlTWFpbCByb2NrcyAhIEhlcmUgYXJlIHNvbWUgd2VpcmQgY2hhcmFjdGVycyA95y4=?=
+            
+            This value can be used as for example the subject of a message.
+            If you suspect the text to contain non ASCII characters, do message.Subject = Codec.RFC2047Encode(yourRawValue);.
+            </example>
+        </member>
+        <member name="M:ActiveUp.Net.Codec.RFC2047Decode(System.String)">
+            <summary>
+            Decodes the given string from the format specified in RFC 2047 (=?charset?value?=).
+            </summary>
+            <param name="input">The string to be decoded.</param>
+            <returns>The decoded string.</returns>
+            <example>
+            The example below illustrates the decoding of a string.
+            <code>
+            C#
+            
+            string input = "I once wrote that =?iso-8859-1?B?QWN0aXZlTWFpbCByb2NrcyAhIEhlcmUgYXJlIHNvbWUgd2VpcmQgY2hhcmFjdGVycyA95y4=?=";
+            string output = Codec.RFC2047Decode(input);
+            </code>
+            
+            output returns I once wrote that ActiveMail rocks ! Here are some weird characters =ç.
+            </example>
+        </member>
+        <member name="M:ActiveUp.Net.Codec.FromQuotedPrintable(System.String,System.String)">
+            <summary>
+            Decodes text from quoted-printable format defined in RFC 2045 and RFC 2046.
+            </summary>
+            <param name="toCharset">The original charset of input.</param>
+            <param name="input">Data to be decoded.</param>
+            <returns>The decoded data.</returns>
+            <example>
+            The example below illustrates the decoding of a string from quoted-printable.
+            <code>
+            C#
+            
+            string input = "A=\r\nctiveMail rocks ! Here are some weird characters =3D=E7.";
+            string output = Codec.FromQuotedPrintable(input,"iso-8859-1");
+            </code>
+            
+            output returns ActiveMail rocks ! Here are some weird characters =ç.
+            </example>
+        </member>
+        <member name="M:ActiveUp.Net.Codec.Wrap(System.String,System.Int32)">
+            <summary>
+            Wraps the given string to a set of lines of a maximum given length.
+            </summary>
+            <param name="input">Data to be wrapped.</param>
+            <param name="totalchars">The maximum length for each line.</param>
+            <returns>The data as a set of lines of a maximum length.</returns>
+            <remarks>This can be used to wrap lines to a maximum length of 78 characters to ensure data integrity across some gateways.</remarks>
+        </member>
+        <member name="T:ActiveUp.Net.Logger">
+            <summary>
+            Provides all logging facilities for any applications.
+            </summary>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.#ctor">
+            <summary>
+            The default constructor.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.LogEntries">
+            <summary>
+            Gets or sets the log entries that are stored in the memory.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.LogLevel">
+            <summary>
+            Gets or sets the logging level.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.LogInMemory">
+            <summary>
+            Specify whether if you want to log in memory.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.LogFile">
+            <summary>
+            Gets or sets the full path to the text file to append when logging.
+            </summary>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.AddEntry(System.String,System.Int32)">
+            <summary>
+            Add a log entry using the logging level.
+            </summary>
+            <param name="line">The entry to add.</param>
+            <param name="level">The log entry level.</param>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.AddEntry(System.String)">
+            <summary>
+            Add a log entry in all logging objects availables.
+            </summary>
+            <param name="line">The entry to add.</param>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.AddEntryToFile(System.String)">
+            <summary>
+            Append the logging text file.
+            </summary>
+            <param name="line">The entry to add.</param>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.AddEntryToTrace(System.String)">
+            <summary>
+            Append the trace context.
+            </summary>
+            <param name="line">The entry to add.</param>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.LastEntries(System.Int32)">
+            <summary>
+            Gets an ArrayList containing the specified number of last entries.
+            </summary>
+            <param name="lines">The max lines to retrieve.</param>
+            <returns>An ArrayList containing the maximum log entries.</returns>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.LastEntries">
+            <summary>
+            Gets a string containing a maximum of 30 log entries.
+            </summary>
+            <returns>A maximum of 30 entries separeted by a carriage return.</returns>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.LastEntry">
+            <summary>
+            Gets the last entry of the log.
+            </summary>
+            <returns>A string containing the last entry.</returns>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.Count">
+            <summary>
+            Gets the number of log entries.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.UseTraceContext">
+            <summary>
+            Specify whether if the logger needs to append the Trace Context.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.Logger.Disabled">
+            <summary>
+            Specify whether if the logging functions are disabled.
+            </summary>
+        </member>
+        <member name="E:ActiveUp.Net.Logger.EntryAdded">
+            <summary>
+            The EntryAdded event handler.
+            </summary>
+        </member>
+        <member name="M:ActiveUp.Net.Logger.OnEntryAdded(System.EventArgs)">
+            <summary>
+            OnEntryAdded event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:ActiveUp.Net.TimedUdpClient">
+            <summary>
+            Summary description for TimedUdpClient.
+            </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._returnReceive">
+            <summary>
+            The result of the receive (udp mode).
+            </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._errorOccurs">
+            <summary>
+            Indicates if an error occurs.
+            </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._threadReceive">
+             <summary>
+            The main job of this thread is to receive data in udp.
+             </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._remote">
+            <summary>
+            Represents a network endpoint as an IP address and a port number.
+            </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._mutexReturnReceive">
+            <summary>
+            Protects integrity of the _returnReceive variable.
+            </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._mutexErrorOccurs">
+            <summary>
+            Protects integrity of the _errorOccurs variable.
+            </summary>
+        </member>
+        <member name="F:ActiveUp.Net.TimedUdpClient._timeout">
+            <summary>
+            Timeout of the underlying UdpClient.
+            </summary>
+        </member>
+        <member name="P:ActiveUp.Net.TimedUdpClient.Timeout">
+            <summary>
+            Gets or sets the timeout of the underlying UdpClient.
+            </summary>
+        </member>
+        <member name="M:ActiveUp.Net.TimedUdpClient.Receive(System.Net.IPEndPoint@)">
+            <summary>
+            Receives data.
+            </summary>
+            <param name="remote">Server pointer.</param>
+            <returns>The received data.</returns>
+        </member>
+        <member name="M:ActiveUp.Net.TimedUdpClient.StartReceive">
+            <summary>
+            Receive thread.
+            </summary>
+        </member>
+    </members>
+</doc>

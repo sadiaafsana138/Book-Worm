@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eLibraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin_Table">
+    <Key>
+      <PropertyRef Name="Admin_ID" />
+    </Key>
+    <Property Name="Admin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nchar" MaxLength="50" />
+    <Property Name="Password" Type="nchar" MaxLength="50" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Contact_No" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Author_Table">
+    <Key>
+      <PropertyRef Name="Author_ID" />
+    </Key>
+    <Property Name="Author_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuthorName" Type="nchar" MaxLength="50" />
+    <Property Name="Book_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Book_Table">
+    <Key>
+      <PropertyRef Name="Book_ID" />
+    </Key>
+    <Property Name="Book_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="nchar" MaxLength="50" />
+    <Property Name="AuthorName" Type="nchar" MaxLength="50" />
+    <Property Name="PublisherName" Type="nchar" MaxLength="50" />
+    <Property Name="Language" Type="nchar" MaxLength="50" />
+    <Property Name="Edition" Type="nchar" MaxLength="50" />
+    <Property Name="BookCost" Type="nchar" MaxLength="50" />
+    <Property Name="Actual_Stock" Type="nchar" MaxLength="50" />
+    <Property Name="Current_Stock" Type="nchar" MaxLength="50" />
+    <Property Name="Book_Image" Type="image" />
+  </EntityType>
+  <EntityType Name="CharityFund_Table">
+    <Key>
+      <PropertyRef Name="Fund_ID" />
+    </Key>
+    <Property Name="Fund_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FundTittle" Type="nchar" MaxLength="50" />
+    <Property Name="Description" Type="nchar" MaxLength="100" />
+    <Property Name="Bkash_No" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Contributor_Table">
+    <Key>
+      <PropertyRef Name="Contributor_ID" />
+    </Key>
+    <Property Name="Contributor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContributorName" Type="nchar" MaxLength="50" />
+    <Property Name="Fund_ID" Type="int" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Contact_No" Type="nchar" MaxLength="50" />
+    <Property Name="admin_id" Type="int" />
+    <Property Name="member_id" Type="int" />
+    <Property Name="Amount" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Defaulter_Table">
+    <Key>
+      <PropertyRef Name="Defaulter_ID" />
+    </Key>
+    <Property Name="Defaulter_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Member_ID" Type="int" Nullable="false" />
+    <Property Name="MemberName" Type="nchar" MaxLength="50" />
+    <Property Name="Contact_No" Type="nchar" MaxLength="50" />
+    <Property Name="Book_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IssuedBook_Table">
+    <Key>
+      <PropertyRef Name="IssuedBook_ID" />
+    </Key>
+    <Property Name="IssuedBook_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Member_ID" Type="int" Nullable="false" />
+    <Property Name="Book_ID" Type="int" Nullable="false" />
+    <Property Name="IssuedDate" Type="datetime" />
+    <Property Name="DueDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Member_Table">
+    <Key>
+      <PropertyRef Name="Member_ID" />
+    </Key>
+    <Property Name="Member_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nchar" MaxLength="50" />
+    <Property Name="UserName" Type="nchar" MaxLength="50" />
+    <Property Name="Password" Type="nchar" MaxLength="50" />
+    <Property Name="Contact_No" Type="nchar" MaxLength="50" />
+    <Property Name="City" Type="nchar" MaxLength="50" />
+    <Property Name="Area" Type="nchar" MaxLength="50" />
+    <Property Name="account_status" Type="nchar" MaxLength="50" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Publisher_Table">
+    <Key>
+      <PropertyRef Name="Publisher_ID" />
+    </Key>
+    <Property Name="Publisher_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PublisherName" Type="nchar" MaxLength="50" />
+    <Property Name="Book_ID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Author_Table_Author_Table">
+    <End Role="Book_Table" Type="Self.Book_Table" Multiplicity="0..1" />
+    <End Role="Author_Table" Type="Self.Author_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book_Table">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="Author_Table">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contributor_Table_Admin_Table">
+    <End Role="Admin_Table" Type="Self.Admin_Table" Multiplicity="0..1" />
+    <End Role="Contributor_Table" Type="Self.Contributor_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin_Table">
+        <PropertyRef Name="Admin_ID" />
+      </Principal>
+      <Dependent Role="Contributor_Table">
+        <PropertyRef Name="admin_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contributor_Table_CharityFund_Table">
+    <End Role="CharityFund_Table" Type="Self.CharityFund_Table" Multiplicity="0..1" />
+    <End Role="Contributor_Table" Type="Self.Contributor_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CharityFund_Table">
+        <PropertyRef Name="Fund_ID" />
+      </Principal>
+      <Dependent Role="Contributor_Table">
+        <PropertyRef Name="Fund_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contributor_Table_Member_Table">
+    <End Role="Member_Table" Type="Self.Member_Table" Multiplicity="0..1" />
+    <End Role="Contributor_Table" Type="Self.Contributor_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member_Table">
+        <PropertyRef Name="Member_ID" />
+      </Principal>
+      <Dependent Role="Contributor_Table">
+        <PropertyRef Name="member_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Defaulter_Table_Book_Table">
+    <End Role="Book_Table" Type="Self.Book_Table" Multiplicity="1" />
+    <End Role="Defaulter_Table" Type="Self.Defaulter_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book_Table">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="Defaulter_Table">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Defaulter_Table_Member_Table">
+    <End Role="Member_Table" Type="Self.Member_Table" Multiplicity="1" />
+    <End Role="Defaulter_Table" Type="Self.Defaulter_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member_Table">
+        <PropertyRef Name="Member_ID" />
+      </Principal>
+      <Dependent Role="Defaulter_Table">
+        <PropertyRef Name="Member_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IssuedBook_Table_Book_Table">
+    <End Role="Book_Table" Type="Self.Book_Table" Multiplicity="1" />
+    <End Role="IssuedBook_Table" Type="Self.IssuedBook_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book_Table">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="IssuedBook_Table">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IssuedBook_Table_Member_Table1">
+    <End Role="Member_Table" Type="Self.Member_Table" Multiplicity="1" />
+    <End Role="IssuedBook_Table" Type="Self.IssuedBook_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member_Table">
+        <PropertyRef Name="Member_ID" />
+      </Principal>
+      <Dependent Role="IssuedBook_Table">
+        <PropertyRef Name="Member_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Publisher_Table_Book_Table">
+    <End Role="Book_Table" Type="Self.Book_Table" Multiplicity="0..1" />
+    <End Role="Publisher_Table" Type="Self.Publisher_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book_Table">
+        <PropertyRef Name="Book_ID" />
+      </Principal>
+      <Dependent Role="Publisher_Table">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="eLibraryDBModelStoreContainer">
+    <EntitySet Name="Admin_Table" EntityType="Self.Admin_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Author_Table" EntityType="Self.Author_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book_Table" EntityType="Self.Book_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CharityFund_Table" EntityType="Self.CharityFund_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contributor_Table" EntityType="Self.Contributor_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Defaulter_Table" EntityType="Self.Defaulter_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IssuedBook_Table" EntityType="Self.IssuedBook_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member_Table" EntityType="Self.Member_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Publisher_Table" EntityType="Self.Publisher_Table" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Author_Table_Author_Table" Association="Self.FK_Author_Table_Author_Table">
+      <End Role="Book_Table" EntitySet="Book_Table" />
+      <End Role="Author_Table" EntitySet="Author_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contributor_Table_Admin_Table" Association="Self.FK_Contributor_Table_Admin_Table">
+      <End Role="Admin_Table" EntitySet="Admin_Table" />
+      <End Role="Contributor_Table" EntitySet="Contributor_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contributor_Table_CharityFund_Table" Association="Self.FK_Contributor_Table_CharityFund_Table">
+      <End Role="CharityFund_Table" EntitySet="CharityFund_Table" />
+      <End Role="Contributor_Table" EntitySet="Contributor_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contributor_Table_Member_Table" Association="Self.FK_Contributor_Table_Member_Table">
+      <End Role="Member_Table" EntitySet="Member_Table" />
+      <End Role="Contributor_Table" EntitySet="Contributor_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Defaulter_Table_Book_Table" Association="Self.FK_Defaulter_Table_Book_Table">
+      <End Role="Book_Table" EntitySet="Book_Table" />
+      <End Role="Defaulter_Table" EntitySet="Defaulter_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Defaulter_Table_Member_Table" Association="Self.FK_Defaulter_Table_Member_Table">
+      <End Role="Member_Table" EntitySet="Member_Table" />
+      <End Role="Defaulter_Table" EntitySet="Defaulter_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IssuedBook_Table_Book_Table" Association="Self.FK_IssuedBook_Table_Book_Table">
+      <End Role="Book_Table" EntitySet="Book_Table" />
+      <End Role="IssuedBook_Table" EntitySet="IssuedBook_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IssuedBook_Table_Member_Table1" Association="Self.FK_IssuedBook_Table_Member_Table1">
+      <End Role="Member_Table" EntitySet="Member_Table" />
+      <End Role="IssuedBook_Table" EntitySet="IssuedBook_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Publisher_Table_Book_Table" Association="Self.FK_Publisher_Table_Book_Table">
+      <End Role="Book_Table" EntitySet="Book_Table" />
+      <End Role="Publisher_Table" EntitySet="Publisher_Table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

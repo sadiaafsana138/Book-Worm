@@ -1,0 +1,34 @@
+﻿@model BookWorm.Models.Publisher_Table
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Publisher_Table</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublisherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Table.BookName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Table.BookName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Publisher_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

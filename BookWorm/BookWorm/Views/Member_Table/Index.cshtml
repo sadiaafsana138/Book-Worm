@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BookWorm.Models.Member_Table>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Member List</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Contact_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.account_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Member_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Member_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Member_ID })
+        </td>
+    </tr>
+}
+
+</table>

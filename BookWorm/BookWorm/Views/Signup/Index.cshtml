@@ -1,0 +1,148 @@
+﻿@model BookWorm.Models.Member_Table
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+
+@using (Html.BeginForm("Index", "Signup", FormMethod.Post))
+{
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <center>
+                                <img width="100px" src="images/generaluser.png" />
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <center>
+                                <h4>Your Profile</h4>
+                                <span>Account Status - </span>
+
+                                @Html.ValidationMessageFor(model => model.account_status,"Pending", new { @class = "form-control", Text="Pending"})
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Full Name</label>
+                            <div class="form-group">
+
+                               
+                                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Username</label>
+                            <div class="form-group">
+
+
+                               
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Contact No</label>
+                            <div class="form-group">
+
+
+                                @Html.TextBoxFor(model => model.Contact_No, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Email ID</label>
+                            <div class="form-group">
+
+                              
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>City</label>
+                            <div class="form-group">
+
+
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Area</label>
+                            <div class="form-group">
+
+
+                              
+                                @Html.TextBoxFor(model => model.Area, new { @class = "form-control" })
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <div class="form-group">
+
+
+
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Confirm Password</label>
+                                <div class="form-group">
+
+                                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8 mx-auto">
+                                <center>
+                                    <div class="form-group">
+                                        <input class="btn btn-info btn-block btn-lg" id="Button2" type="submit" value="SignUp" />
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8 mx-auto">
+                                <center>
+                                    <div class="form-group">
+                                        <label class="label-success">@ViewBag.SuccessMessage</label>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="Home"><< Back to Home</a><br><br>
+            </div>
+        </div>
+        </div>
+    </div>
+}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

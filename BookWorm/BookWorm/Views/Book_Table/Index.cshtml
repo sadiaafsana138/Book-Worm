@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BookWorm.Models.Book_Table>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Book List</h2>
+
+<body>
+
+
+    @if (Session["Admin_ID"] != null)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublisherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookCost)
+            </th>
+
+
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublisherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookCost)
+                </td>
+                @if (Session["Admin_ID"] != null && Session["Member_ID"] == null)
+                {
+                    <td>
+
+
+
+                        <div>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Book_ID.ToString() }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Book_ID.ToString() }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Book_ID.ToString() })
+                        </div>
+
+
+
+                    </td>
+                }
+                @if (Session["Member_ID"] != null)
+                {
+                    <td>
+
+
+                        @Html.ActionLink("Request", "Request", new { id = item.Book_ID })
+
+
+
+
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</body>
+

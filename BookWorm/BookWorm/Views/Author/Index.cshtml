@@ -1,0 +1,135 @@
+﻿@model IEnumerable<BookWorm.Models.Author_Table>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col">
+                            <center>
+                                <h4>Publisher Details</h4>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <center>
+                                <img width="100px" src="images/writer.png" />
+
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Publisher ID</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input CssClass="form-control" ID="TextBox1" runat="server" placeholder="ID" />
+                                    <input class="btn btn-primary" ID="Button1" runat="server" value="Go" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label>Publisher Name</label>
+                            <div class="form-group">
+                                <input CssClass="form-control" ID="TextBox2" runat="server" placeholder="publisher Name" />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            @Html.ActionLink("ADD", "Create")
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <a href="Home"><< Back to Home</a><br>
+            <br>
+        </div>
+
+        <div class="col-md-7">
+
+            <div class="card">
+                <div class="card-body">
+
+
+
+                    <div class="row">
+                        <div class="col">
+                            <center>
+                                <h4>Publisher List</h4>
+                            </center>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AuthorName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Book_Table.BookName)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AuthorName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Book_Table.BookName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Author_ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Author_ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Author_ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

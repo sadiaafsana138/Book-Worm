@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eLibraryDBModelStoreContainer" CdmEntityContainer="eLibraryDBEntities">
+    <EntitySetMapping Name="Admin_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Admin_Table">
+        <MappingFragment StoreEntitySet="Admin_Table">
+          <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Author_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Author_Table">
+        <MappingFragment StoreEntitySet="Author_Table">
+          <ScalarProperty Name="Author_ID" ColumnName="Author_ID" />
+          <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+          <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Book_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Book_Table">
+        <MappingFragment StoreEntitySet="Book_Table">
+          <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+          <ScalarProperty Name="BookName" ColumnName="BookName" />
+          <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+          <ScalarProperty Name="PublisherName" ColumnName="PublisherName" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Edition" ColumnName="Edition" />
+          <ScalarProperty Name="BookCost" ColumnName="BookCost" />
+          <ScalarProperty Name="Actual_Stock" ColumnName="Actual_Stock" />
+          <ScalarProperty Name="Current_Stock" ColumnName="Current_Stock" />
+          <ScalarProperty Name="Book_Image" ColumnName="Book_Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CharityFund_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.CharityFund_Table">
+        <MappingFragment StoreEntitySet="CharityFund_Table">
+          <ScalarProperty Name="Fund_ID" ColumnName="Fund_ID" />
+          <ScalarProperty Name="FundTittle" ColumnName="FundTittle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Bkash_No" ColumnName="Bkash_No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contributor_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Contributor_Table">
+        <MappingFragment StoreEntitySet="Contributor_Table">
+          <ScalarProperty Name="Contributor_ID" ColumnName="Contributor_ID" />
+          <ScalarProperty Name="ContributorName" ColumnName="ContributorName" />
+          <ScalarProperty Name="Fund_ID" ColumnName="Fund_ID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+          <ScalarProperty Name="member_id" ColumnName="member_id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Defaulter_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Defaulter_Table">
+        <MappingFragment StoreEntitySet="Defaulter_Table">
+          <ScalarProperty Name="Defaulter_ID" ColumnName="Defaulter_ID" />
+          <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+          <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IssuedBook_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.IssuedBook_Table">
+        <MappingFragment StoreEntitySet="IssuedBook_Table">
+          <ScalarProperty Name="IssuedBook_ID" ColumnName="IssuedBook_ID" />
+          <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+          <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Member_Table">
+        <MappingFragment StoreEntitySet="Member_Table">
+          <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="account_status" ColumnName="account_status" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publisher_Table">
+      <EntityTypeMapping TypeName="eLibraryDBModel.Publisher_Table">
+        <MappingFragment StoreEntitySet="Publisher_Table">
+          <ScalarProperty Name="Publisher_ID" ColumnName="Publisher_ID" />
+          <ScalarProperty Name="PublisherName" ColumnName="PublisherName" />
+          <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
